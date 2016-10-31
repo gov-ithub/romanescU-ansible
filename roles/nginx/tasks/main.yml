@@ -1,6 +1,14 @@
 ---
 # tasks file for nginx
-- name: Install nginx if OS is Ubuntu
-  apt: name={{ item }} state="present"
+- name: Clone nginx-builder project
+  git:
+    repo: "https://github.com/gp187/nginx-builder.git"
+    dest: "/tmp/nginx-builder"
+
+- name: Run build process
+  command: "{{ item }}"
+  args:
+    chdir: "/tmp/nginx-builder"
   with_items:
-    - nginx
+    - "./install.sh --full --steroids"
+
