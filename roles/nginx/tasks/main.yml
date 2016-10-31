@@ -1,0 +1,6 @@
+---
+# tasks file for nginx
+- name: Install nginx if OS is Ubuntu
+  apt: name={{ item }} state="present"
+  with_items:
+    - nginx
