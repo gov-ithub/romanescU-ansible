@@ -18,4 +18,5 @@
 - hosts:
     - webservers
   roles:
+    - java
     - nginx

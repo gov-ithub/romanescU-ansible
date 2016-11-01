@@ -3,8 +3,8 @@
 #10.11.1.28                          # IP or hostname of ES Node
 
 [webservers]
-10.11.1.22
-#192.168.1.x
+#10.11.1.74
+192.168.1.166
 
 [ha_proxy]
 #192.168.1.x
