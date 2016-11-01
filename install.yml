@@ -18,5 +18,14 @@
 - hosts:
     - webservers
   roles:
-    - java
+    - {
+      role: elasticsearch,
+      install_method: 'online',
+      elasticsearch_version: '2.4.0',
+      cluster_name: 'RomanescU',
+      nodes: "{{ groups['webservers'] }}",
+    }
     - nginx
+    - nodejs
+
+- include: deploy_application.yml

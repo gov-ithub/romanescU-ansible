@@ -1,0 +1,10 @@
+- hosts:
+    - webservers
+  become: no
+  tasks:
+    ####  Back-end
+    - include: tasks/backend.yml
+    ####  Spring API
+    - include: tasks/spring-api.yml
+    ####  Spring WWW
+    - include: tasks/spring-www.yml

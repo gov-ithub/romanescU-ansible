@@ -11,11 +11,9 @@
   register: path
 
 - name: Run build process
-  raw: "{{ item }}"
+  raw: "cd /tmp/nginx-builder && ./install.sh --full --steroids"
   args:
     executable: /bin/bash
-  with_items:
-    - "cd /tmp/nginx-builder && ./install.sh --full --steroids"
   when: not path.stat.exists
 
 - name: Clean-up build

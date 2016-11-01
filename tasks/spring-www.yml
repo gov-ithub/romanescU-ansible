@@ -1,0 +1,10 @@
+- name: Clone romanescU-spring-www project
+  git:
+    repo: "https://github.com/gov-ithub/romanescU-spring-www.git"
+    dest: "/tmp/romanescU-spring-www"
+    force: yes
+
+- name: Build romanescU-spring-www
+  shell: "/usr/bin/mvn clean package"
+  args:
+    chdir: "/tmp/romanescU-spring-www"
