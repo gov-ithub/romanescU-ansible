@@ -1,4 +1,5 @@
 [elasticsearch_nodes]
+<<<<<<< HEAD
 #10.11.1.22                          # IP or hostname of ES Node
 #10.11.1.28                          # IP or hostname of ES Node
 
@@ -11,3 +12,17 @@
 
 [es_backup]
 #192.168.1.x
+=======
+10.11.1.22                          # IP or hostname of ES Node
+10.11.1.28                          # IP or hostname of ES Node
+
+[webservers]
+192.168.1.x
+192.168.1.x
+
+[ha_proxy]
+192.168.1.x
+
+[es_backup]
+192.168.1.x
+>>>>>>> master
