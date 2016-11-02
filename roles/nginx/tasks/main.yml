@@ -1,6 +1,5 @@
 ---
 # tasks file for nginx
-<<<<<<< HEAD
 - name: Clone nginx-builder project
   git:
     repo: "https://github.com/gp187/nginx-builder.git"
@@ -37,9 +36,7 @@
 
 - name: Start and enable Nginx service
   service: name="nginx" state="started" enabled=yes
-=======
 - name: Install nginx if OS is Ubuntu
   apt: name={{ item }} state="present"
   with_items:
     - nginx
->>>>>>> master
