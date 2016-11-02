@@ -1,5 +1,7 @@
 ---
 # tasks file for elasticsearch
+<<<<<<< HEAD
+=======
 - name: Install java and selinux bindings if OS is RedHat 7
   yum: name={{ item }} state="present"
   with_items:
@@ -27,6 +29,7 @@
     - oracle-java8-set-default
   when: ansible_os_family == "Debian" and ansible_distribution_major_version|int >= 14
 
+>>>>>>> master
 - name: Get installation tar from elastic  website
   get_url:
     url: "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/{{elasticsearch_version}}/elasticsearch-{{elasticsearch_version}}.tar.gz"
@@ -34,6 +37,8 @@
     timeout: 30
   when: install_method == "online"
 
+<<<<<<< HEAD
+=======
 - name: Get installation tar from docker repo
   get_url:
     url: "http://{{ groups['docker_repo'][0] }}/custom/elasticsearch-{{elasticsearch_version}}.tar.gz"
@@ -41,6 +46,7 @@
     timeout: 30
   when: install_method == "docker"
 
+>>>>>>> master
 - name: Copy installation package from local machine
   copy:
     src: "{{ install_archive }}"
