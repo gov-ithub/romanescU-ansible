@@ -1,33 +1,25 @@
+
 - hosts: all
-  gather_facts: False
+ gather_facts: False
 
-  tasks:
-  - name: install python 2
-    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
-#- hosts:
-#    - elasticsearch_nodes
-#  roles:
-#    - {
-#      role: elasticsearch,
-#      install_method: 'online',
-#      elasticsearch_version: '2.4.0',
-#      cluster_name: 'RomanescU'
-#    }
+ tasks:
+ - name: install python 2
+   raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
 
 - hosts:
-    - webservers
+   - elasticsearch_nodes
+ roles:
+   - {
+     role: elasticsearch,
+     install_method: 'online',
+     elasticsearch_version: '2.4.0',
+     cluster_name: 'RomanescU'
+   }
+
 - hosts:
-    - elasticsearch_nodes
-  roles:
-    - {
-      role: elasticsearch,
-      install_method: 'online',
-      elasticsearch_version: '2.4.0',
-      cluster_name: 'RomanescU',
-      nodes: "{{ groups['webservers'] }}",
-    }
-    - nginx
-    - nodejs
+   - webservers
+ roles:
+   - nginx
+   - nodejs
 
 - include: deploy_application.yml
-      cluster_name: 'RomanescU'
