@@ -10,8 +10,10 @@
 
   tasks:
     ####  Back-end
-    - include: tasks/backpanel.yml
+    - include: tasks/build_backpanel.yml
     ####  Spring API
-    - include: tasks/spring-api.yml
+    - include: tasks/build_spring_api.yml
     ####  Spring WWW
-    - include: tasks/spring-www.yml
+    - include: tasks/build_spring_www.yml
+    ####  Create Services for application and start them
+    - include: tasks/create_services.yml

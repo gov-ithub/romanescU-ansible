@@ -13,8 +13,3 @@
     - "/usr/local/bin/bower install"
     - "/usr/local/bin/gulp"
 
-#- name: Install bower packages
-#  shell:
-#  args:
-#    chdir: "/tmp/romanescU-backpanel"
-

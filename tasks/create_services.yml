@@ -1,16 +1,20 @@
-- name: Clone romanescU-spring-www project
-  git:
-    repo: "https://github.com/gov-ithub/romanescU-spring-www.git"
-    dest: "{{ spring_www_folder }}"
-    force: yes
+- name: Check service definition file
+  stat: path="/lib/systemd/system/romanescU_api.service"
+  register: api_service
 
-- name: Get backpanel app
-  shell: "cp -R {{ backpanel_folder }}/dist/* {{ spring_www_folder }}/src/main/webapp/"
+- name: Generate service definition file
+  template:
+    src: "./templates/romanescu_api.service.j2"
+    dest: "/lib/systemd/system/romanescU_api.service"
+  when: not api_service.stat.exists
+  become: yes
 
-- name: Build romanescU-spring-www
-  shell: "/usr/bin/mvn clean package"
-  args:
-    chdir: "{{ spring_www_folder }}"
+- name: Start and enable service
+  service:
+    name: "romanescU_api"
+    state: "started"
+    enabled: yes
+  become: yes
 
 - name: Check service definition file
   stat: path="/lib/systemd/system/romanescU_www.service"
