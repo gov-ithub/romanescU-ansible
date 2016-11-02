@@ -22,7 +22,7 @@
     state: "absent"
   with_items:
     - "/tmp/nginx-builder"
-    - "/home/{{ ansible_env.SUDO_USER}}/nginx-build"
+#    - "/home/{{ ansible_env.SUDO_USER}}/nginx-build"
     - "/etc/init.d/nginx"
 
 - name: Fix PID file location in Nginx service definition

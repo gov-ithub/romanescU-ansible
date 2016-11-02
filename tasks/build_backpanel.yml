@@ -10,6 +10,6 @@
     chdir: "{{ backpanel_folder }}"
   with_items:
     - "/usr/bin/npm install"
-    - "/usr/local/bin/bower install"
+    - "/usr/local/bin/bower install --allow-root"
     - "/usr/local/bin/gulp"
 
