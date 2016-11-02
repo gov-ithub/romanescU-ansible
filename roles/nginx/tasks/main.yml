@@ -22,7 +22,7 @@
     state: "absent"
   with_items:
     - "/tmp/nginx-builder"
-    - "/home/{{ ansible_env.SUDO_USER}}/nginx-build"
+#    - "/home/{{ ansible_env.SUDO_USER}}/nginx-build"
     - "/etc/init.d/nginx"
 
 - name: Fix PID file location in Nginx service definition
@@ -34,9 +34,5 @@
 - name: Reload SystemD definitions
   command: systemctl daemon-reload
 
-- name: Start and enable Nginx service
-  service: name="nginx" state="started" enabled=yes
-- name: Install nginx if OS is Ubuntu
-  apt: name={{ item }} state="present"
-  with_items:
-    - nginx
+#- name: Start and enable Nginx service
+#  service: name="nginx" state="started" enabled=yes
