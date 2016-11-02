@@ -4,27 +4,20 @@
   tasks:
   - name: install python 2
     raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
-#
-#- hosts:
-#    - elasticsearch_nodes
-#  roles:
-#    - {
-#      role: elasticsearch,
-#      install_method: 'online',
-#      elasticsearch_version: '2.4.0',
-#      cluster_name: 'RomanescU'
-#    }
 
 - hosts:
-    - webservers
+    - elasticsearch_nodes
   roles:
     - {
       role: elasticsearch,
       install_method: 'online',
       elasticsearch_version: '2.4.0',
-      cluster_name: 'RomanescU',
-      nodes: "{{ groups['webservers'] }}",
+      cluster_name: 'RomanescU'
     }
+
+- hosts:
+    - webservers
+  roles:
     - nginx
     - nodejs
 
