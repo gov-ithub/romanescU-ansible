@@ -35,6 +35,15 @@ Ideally, Ansible should be run from a host that has a private key with public ke
     
 > ansible-playbook -bkK -i hosts -u ubuntu [playbook].yml
 
+> ansible-playbook -i hosts -ku root install.yml
+
+3. Testing the playbook syntax
+
+> ansible-playbook --syntax-check install.yml
+
+
+
+
 License
 -------
 

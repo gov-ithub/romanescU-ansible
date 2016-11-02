@@ -1,14 +1,14 @@
 
 - hosts: all
- gather_facts: False
+  gather_facts: False
 
- tasks:
- - name: install python 2
-   raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+  tasks:
+  - name: install python 2
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
 
 - hosts:
    - elasticsearch_nodes
- roles:
+  roles:
    - {
      role: elasticsearch,
      install_method: 'online',
@@ -18,7 +18,8 @@
 
 - hosts:
    - webservers
- roles:
+  roles:
+   - java
    - nginx
    - nodejs
 
