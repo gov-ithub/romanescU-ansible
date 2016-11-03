@@ -1,0 +1,4 @@
+#{{ ansible_managed }}
+{% for v in nginx_service_upstreams[item] %}
+    upstream {{v}}
+{% endfor %}
