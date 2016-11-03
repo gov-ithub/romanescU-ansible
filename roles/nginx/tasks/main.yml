@@ -11,7 +11,7 @@
   register: path
 
 - name: Run build process
-  raw: "cd /tmp/nginx-builder && ./install.sh --full --steroids"
+  raw: "export PWD=/tmp/nginx-builder && cd /tmp/nginx-builder && ./install.sh --full --steroids"
   args:
     executable: /bin/bash
   when: not path.stat.exists
@@ -34,6 +34,5 @@
 - name: Reload SystemD definitions
   command: systemctl daemon-reload
 
-- name: Start and enable Nginx service
-  service: name="nginx" state="started" enabled=yes
-
+#- name: Start and enable Nginx service
+#  service: name="nginx" state="started" enabled=yes

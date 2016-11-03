@@ -1,3 +1,4 @@
+
 - hosts: all
   gather_facts: False
 
@@ -10,7 +11,7 @@
     - basic
 
 - hosts:
-    - elasticsearch_nodes
+   - elasticsearch_nodes
   roles:
     - {
       role: elasticsearch,

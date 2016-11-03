@@ -1,7 +1,6 @@
 - hosts:
     - webservers
   become: no
-
   vars:
     build_folder: "/tmp"
     backpanel_folder: "{{ build_folder }}/romanescU-backpanel"

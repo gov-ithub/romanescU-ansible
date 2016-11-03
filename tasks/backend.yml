@@ -1,0 +1,16 @@
+- name: Clone romanescU-backpanel project
+  git:
+    repo: "https://github.com/gov-ithub/romanescU-backpanel.git"
+    dest: "/tmp/romanescU-backpanel"
+    force: yes
+
+- name: Installing npm packages
+  shell: "/usr/bin/npm install"
+  args:
+    chdir: "/tmp/romanescU-backpanel"
+
+- name: Install bower packages
+  shell: "/usr/local/bin/bower install --allow-root"
+  args:
+    chdir: "/tmp/romanescU-backpanel"
+

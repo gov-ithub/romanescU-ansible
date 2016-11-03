@@ -28,12 +28,21 @@ Ideally, Ansible should be run from a host that has a private key with public ke
 1. Running with private keys installed on all hosts
 
     
-    ansible-playbook  -b -i hosts -u ubuntu [playbook].yml
+> ansible-playbook  -b -i hosts -u ubuntu [playbook].yml
     
 2. Running with prompt for SSH password and sudo password
     
     
-    ansible-playbook -bkK -i hosts -u ubuntu [playbook].yml
+> ansible-playbook -bkK -i hosts -u ubuntu [playbook].yml
+
+> ansible-playbook -i hosts -ku root install.yml
+
+3. Testing the playbook syntax
+
+> ansible-playbook --syntax-check install.yml
+
+
+
 
 License
 -------
