@@ -1,10 +1,18 @@
 - hosts:
     - webservers
   become: no
+  vars:
+    build_folder: "/tmp"
+    backpanel_folder: "{{ build_folder }}/romanescU-backpanel"
+    spring_api_folder: "{{ build_folder }}/romanescU-spring-api"
+    spring_www_folder: "{{ build_folder }}/romanescU-spring-www"
+
   tasks:
     ####  Back-end
-    - include: tasks/backend.yml
+    - include: tasks/build_backpanel.yml
     ####  Spring API
-    - include: tasks/spring-api.yml
+    - include: tasks/build_spring_api.yml
     ####  Spring WWW
-    - include: tasks/spring-www.yml
+    - include: tasks/build_spring_www.yml
+    ####  Create Services for application and start them
+    - include: tasks/create_services.yml

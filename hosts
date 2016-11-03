@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+[elasticsearch_nodes]
+#10.11.1.22                          # IP or hostname of ES Node
+#10.11.1.28                          # IP or hostname of ES Node
+
+[webservers]
+#10.11.1.74
+192.168.1.166
+
+[ha_proxy]
+#192.168.1.x
+
+[es_backup]
+#192.168.1.x
+=======
 [webservers]
 192.168.1.1  ansible_ssh_pass=22
 192.168.1.1  ansible_port=23
@@ -11,3 +26,4 @@
 
 [ha_proxy]
 #192.168.1.x
+>>>>>>> master
