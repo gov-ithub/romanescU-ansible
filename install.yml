@@ -1,4 +1,3 @@
-
 - hosts: all
   gather_facts: False
 
@@ -17,7 +16,8 @@
       role: elasticsearch,
       install_method: 'online',
       elasticsearch_version: '2.4.0',
-      cluster_name: 'RomanescU'
+      cluster_name: 'RomanescU',
+      when: no
     }
 
 - hosts:

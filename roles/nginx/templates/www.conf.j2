@@ -1,28 +1,25 @@
 #{{ ansible_managed }}
 server {
-{% for v in nginx_sites[item] %}
-    listen 80
-    server_name {{item.server_name}} www.{{item.server_name}}
-    return 301 https://{{item.server_name}}$request_uri
-{% endfor %}
+    listen 80;
+    server_name {{ nginx_sites[item].server_name }} www.{{ nginx_sites[item].server_name }};
+    return 301 https://{{ nginx_sites[item].server_name }}/$request_uri;
 }
 server {
-{% for v in nginx_sites[item] %}
-    listen {{item.listen}}
-	#root /srv/{{item.project_name}}/www;
-	server_name {{item.server_name}};
+    listen {{ nginx_sites[item].listen }};
+	#root /srv/{{ nginx_sites[item].project_name }}/www;
+	server_name {{ nginx_sites[item].server_name }};
 
 	#-->Client: max size
 	client_max_body_size 20M;
 	large_client_header_buffers 4 32k;
     #-->Logs
-	access_log /var/log/nginx/{{item.server_name}}.access.log;
-	error_log  /var/log/nginx/{{item.server_name}}.error.log;
+	access_log /var/log/nginx/{{ nginx_sites[item].server_name }}.access.log;
+	error_log  /var/log/nginx/{{ nginx_sites[item].server_name }}.error.log;
     #-->SSL: certificates
-    ssl_certificate /etc/letsencrypt/live/{{item.server_name}}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/{{item.server_name}}/privkey.pem;
-    ssl_dhparam /etc/ssl/certs/dhparam.pem;
-    #ssl_trusted_certificate /etc/letsencrypt/live/{{item.server_name}}.crt;
+    #ssl_certificate /etc/letsencrypt/live/{{ nginx_sites[item].server_name }}/fullchain.pem;
+    #ssl_certificate_key /etc/letsencrypt/live/{{ nginx_sites[item].server_name }}/privkey.pem;
+    #ssl_dhparam /etc/ssl/certs/dhparam.pem;
+    #ssl_trusted_certificate /etc/letsencrypt/live/{{ nginx_sites[item].server_name }}.crt;
     
     #-->SSL
     keepalive_timeout   70;
@@ -46,7 +43,7 @@ server {
         add_header 'Access-Control-Allow-Origin' '*';
 
         auth_basic           "AuthHere";
-        auth_basic_user_file /srv/{{item.project_name}}/{{ item.auth_file }};
+        auth_basic_user_file /srv/{{ nginx_sites[item].project_name }}/{{ nginx_sites[item].auth_file }};
 
         proxy_pass http://spring_www;
         proxy_http_version 1.1;
@@ -57,7 +54,7 @@ server {
 	location ~ \.(js|css|png|jpg|jpeg|gif|ico|html|woff|ttf|svg|eot|otf|mp3|ogg)$ {
         # ACCESS
         auth_basic           "AuthHere";
-        auth_basic_user_file /srv/{{item.project_name}}/{{ item.auth_file }};
+        auth_basic_user_file /srv/{{ nginx_sites[item].project_name }}/{{ nginx_sites[item].auth_file }};
 
         # CONFIG
         expires 1M;
@@ -67,5 +64,4 @@ server {
         add_header Cache-Control "public";
         add_header "Access-Control-Allow-Origin" "*";
     }
-{% endfor %}
 }

@@ -1,27 +1,24 @@
 #{{ ansible_managed }}
 server {
-{% for v in nginx_sites[item] %}
-    listen 80
-    server_name {{item.server_name}} www.{{item.server_name}}
-    return 301 https://{{item.server_name}}$request_uri
-{% endfor %}
+    listen 80;
+    server_name {{ nginx_sites[item].server_name }} www.{{ nginx_sites[item].server_name }};
+    return 301 https://{{ nginx_sites[item].server_name }}/$request_uri;
 }
 server {
-{% for v in nginx_sites[item] %}
-    listen {{item.listen}}
-	server_name {{item.server_name}};
+    listen {{ nginx_sites[item].listen }};
+	server_name {{ nginx_sites[item].server_name }};
 
 	#-->Client: max size
 	client_max_body_size 20M;
 	large_client_header_buffers 4 32k;
     #-->Logs
-	access_log /var/log/nginx/{{item.server_name}}.access.log;
-	error_log  /var/log/nginx/{{item.server_name}}.error.log;
+	access_log /var/log/nginx/{{ nginx_sites[item].server_name }}.access.log;
+	error_log  /var/log/nginx/{{ nginx_sites[item].server_name }}.error.log;
     #-->SSL: certificates
-    ssl_certificate /etc/letsencrypt/live/{{item.server_name}}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/{{item.server_name}}/privkey.pem;
-    ssl_dhparam /etc/ssl/certs/dhparam.pem;
-    #ssl_trusted_certificate /etc/letsencrypt/live/{{item.server_name}}.crt;
+    #ssl_certificate /etc/letsencrypt/live/{{ nginx_sites[item].server_name }}/fullchain.pem;
+    #ssl_certificate_key /etc/letsencrypt/live/{{ nginx_sites[item].server_name }}/privkey.pem;
+    #ssl_dhparam /etc/ssl/certs/dhparam.pem;
+    #ssl_trusted_certificate /etc/letsencrypt/live/{{ nginx_sites[item].server_name }}.crt;
     
     #-->SSL
     keepalive_timeout   70;
@@ -49,5 +46,4 @@ server {
         proxy_set_header Connection "Keep-Alive";
         proxy_set_header Proxy-Connection "Keep-Alive";
     }
-{% endfor %}
 }

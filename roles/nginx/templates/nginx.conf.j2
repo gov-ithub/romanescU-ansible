@@ -6,27 +6,26 @@ worker_rlimit_core  {{  worker_rlimit_core  }};
 working_directory {{  working_directory  }};
 
 {% if nginx_pid_file %}
-pid        {{ nginx_pid_file }};
+pid {{ nginx_pid_file }};
 {% endif %}
 
 worker_rlimit_nofile {{ nginx_worker_rlimit_nofile }};
 
 events {
-{% for v in nginx_events_params %}
-        {{ v }};
+{% for param in nginx_events_params %}
+        {{ param }};
 {% endfor %}
 }
 
 
 http {
-
-{% for v in nginx_http_params %}
-        {{ v }};
+{% for param in nginx_http_params %}
+        {{ param }};
 {% endfor %}
         # Load Balance
         upstream backend {
-{% for v in nginx_servers %}
-        server {{ v }};
+{% for server in nginx_servers %}
+        server {{ server }} weight=5;
 {% endfor %}
         }
 
