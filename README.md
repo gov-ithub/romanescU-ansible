@@ -13,7 +13,7 @@ Will not work on Windows
 Configuration
 -------------
 
-The IPs of the hosts need to be specified in the hosts file. Roles are split into groups (pretty much self-explanatory):
+Rename hosts_sample to `hosts` and fill in the IPs for every machine. Roles are split into groups (pretty much self-explanatory):
 
 * elasticsearch_nodes - Main Elasticsearch nodes
 * webservers - Nginx webservers
